@@ -1,25 +1,23 @@
 package com.booleanuk.api;
 
-public class  Author {
+public class Publisher {
     private static int  nextId = 1;
 
-    private final int id;
+    private int id;
     private String name;
-    private String email;
+    private String city;
 
-    public Author(String name, String email) {
+    public Publisher(String name, String city) {
         this.id = nextId;
         nextId++;
 
         this.name = name;
-        this.email = email;
+        this.city = city;
     }
-
 
     public int getId() {
         return id;
     }
-
 
     public String getName() {
         return name;
@@ -29,11 +27,11 @@ public class  Author {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCity() {
+        return city;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCity(String email) {
+        this.city = email;
     }
 }
