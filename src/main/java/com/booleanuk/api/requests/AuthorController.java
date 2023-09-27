@@ -2,6 +2,7 @@ package com.booleanuk.api.requests;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 
@@ -27,17 +28,29 @@ public class AuthorController {
 
     @GetMapping("/{id}")
     public Author getOneAuthor(@PathVariable int id) {
-        return this.theAuthors.getOne(id);
+        Author author = this.theAuthors.getOne(id);
+        if (author == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't find that author!");
+        }
+        return author;
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public Author putAuthor(@PathVariable int id, @RequestBody Author author) {
-        return this.theAuthors.editAuthor(id, author);
+        Author theAuthor = this.theAuthors.editAuthor(id, author);
+        if (theAuthor == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't find that author!");
+        }
+        return theAuthor;
     }
 
     @DeleteMapping("/{id}")
     public Author deleteAuthor(@PathVariable int id) {
-        return this.theAuthors.deleteAuthor(id);
+        Author author = this.theAuthors.deleteAuthor(id);
+        if (author == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't find that author!");
+        }
+        return author;
     }
 }
