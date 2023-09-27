@@ -5,7 +5,6 @@ import java.util.Optional;
 
 
 //Model
-//@Getter
 public class AuthorsRepository {
     private ArrayList<Author> authors;
 

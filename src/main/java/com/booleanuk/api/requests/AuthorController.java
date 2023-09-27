@@ -1,6 +1,5 @@
 package com.booleanuk.api.requests;
 
-import com.booleanuk.api.exceptions.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -29,7 +28,6 @@ public class AuthorController {
 
         if (author == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't find the author");
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Couldn't find the author");
         }
         // this stays in controller
         // annotations in controller
@@ -40,7 +38,6 @@ public class AuthorController {
     @ResponseStatus(HttpStatus.CREATED)
     public Author createAuthor(@RequestBody Author author) {
         if (!hasLength(author.getName()) || !hasLength(author.getEmail())) {
-//            throw new BadRequestException("Name and email are required.");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name and email are required.");
 
         }
@@ -51,7 +48,7 @@ public class AuthorController {
     @ResponseStatus(HttpStatus.CREATED)
     public Author updateAuthor(@PathVariable int id, @RequestBody Author author) {
         if (!hasLength(author.getName()) || !hasLength(author.getEmail())) {
-            throw new BadRequestException("Name and email are required.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name and email are required.");
         }
         Author updatedAuthor = this.authorsRepository.update(id, author.getName(), author.getEmail());
 
